@@ -10,9 +10,12 @@ Summary: Tools for working with writable CD, DVD and BluRay media
 URL: http://cdrecord.berlios.de/
 License: Various Open Source Licenses (GPL, CDDL, BSD)
 Group: Archiving/Cd burning
-BuildRequires: %{_lib}attr-devel
+BuildRequires: %{_lib}cap-devel
 Obsoletes: cdrkit < 1.1.11-11
 Obsoletes: cdrkit-genisoimage < 1.1.11-11
+Provides: cdrecord = %{EVRD}
+Provides: mkisofs = %{EVRD}
+Requires(post): libcap-utils
  
 %description
 Cdrtools is a set of command line programs that allows to
@@ -48,6 +51,13 @@ rm -rf \
 	%{buildroot}%{_prefix}/lib/profiled \
 	%{buildroot}%{_prefix}/lib/*.a \
 	%{buildroot}%{_includedir}
+
+# We get this from dvd+rw-tools
+rm -f %{buildroot}%{_bindir}/btcflash
+
+%post
+%{_sbindir}/setcap cap_sys_resource,cap_dac_override,cap_sys_admin,cap_sys_nice,cap_net_bind_service,cap_ipc_lock,cap_sys_rawio+ep %{_bindir}/cdrecord
+%{_sbindir}/setcap cap_dac_override,cap_sys_admin,cap_sys_nice,cap_net_bind_service,cap_sys_rawio+ep %{_bindir}/cdda2wav
 
 %files
 %{_bindir}/*
