@@ -4,7 +4,7 @@
 
 Name: cdrtools
 Version: 3.01
-Release: 2
+Release: 3
 Source0: ftp://ftp.berlios.de/pub/cdrecord/alpha/%{name}-%{version}%{?beta:%{beta}}.tar.bz2
 Summary: Tools for working with writable CD, DVD and BluRay media
 URL: http://cdrecord.berlios.de/
