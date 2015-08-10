@@ -1,14 +1,14 @@
-%define beta a23
+%define beta a31
 # Build system doesn't support DI generation
 %define debug_package %{nil}
 
 Name: cdrtools
 Version: 3.01
-Release: 5
-Source0: ftp://ftp.berlios.de/pub/cdrecord/alpha/%{name}-%{version}%{?beta:%{beta}}.tar.bz2
+Release: 6
+Source0: http://downloads.sourceforge.net/project/cdrtools/%{?beta:alpha/}%{name}-%{version}%{?beta:%{beta}}.tar.bz2
 Summary: Tools for working with writable CD, DVD and BluRay media
-URL: http://cdrecord.berlios.de/
-License: Various Open Source Licenses (GPL, CDDL, BSD)
+URL: http://cdrtools.sourceforge.net/
+License: Various Open Source Licenses (CDDL, LGPL, GPL)
 Group: Archiving/Cd burning
 BuildRequires: %{_lib}cap-devel
 Obsoletes: cdrkit < 1.1.11-11
@@ -26,7 +26,7 @@ The suite includes the following programs:
   cdrecord  A CD/DVD/BD recording program 
   readcd    A program to read CD/DVD/BD media with CD-clone features 
   cdda2wav  The most evolved CD-audio extraction program with paranoia support 
-  mkisofs   A program to create hybrid ISO9660/JOLIET/HFS filesystes
+  mkisofs   A program to create hybrid ISO9660/JOLIET/HFS filesystems
             with optional Rock Ridge attributes 
   isodebug  A program to print mkisofs debug information from media 
   isodump   A program to dump ISO-9660 media 
