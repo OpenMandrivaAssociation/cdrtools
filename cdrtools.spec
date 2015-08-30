@@ -1,10 +1,11 @@
-%define beta a31
+# Set beta to aNN (e.g. a31) if a X.XXaNN preview version was released since the latest Y.YY stable release.
+# %define beta a31
 # Build system doesn't support DI generation
 %define debug_package %{nil}
 
 Name: cdrtools
 Version: 3.01
-Release: 6
+Release: 7
 Source0: http://downloads.sourceforge.net/project/cdrtools/%{?beta:alpha/}%{name}-%{version}%{?beta:%{beta}}.tar.bz2
 Summary: Tools for working with writable CD, DVD and BluRay media
 URL: http://cdrtools.sourceforge.net/
@@ -58,6 +59,7 @@ rm -f %{buildroot}%{_bindir}/btcflash
 %post
 %{_sbindir}/setcap cap_sys_resource,cap_dac_override,cap_sys_admin,cap_sys_nice,cap_net_bind_service,cap_ipc_lock,cap_sys_rawio+ep %{_bindir}/cdrecord
 %{_sbindir}/setcap cap_dac_override,cap_sys_admin,cap_sys_nice,cap_net_bind_service,cap_sys_rawio+ep %{_bindir}/cdda2wav
+%{_sbindir}/setcap cap_dac_override,cap_sys_admin,cap_net_bind_service,cap_sys_rawio+ep %{_bindir}/readcd
 
 %files
 %{_bindir}/*
