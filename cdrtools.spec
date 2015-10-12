@@ -1,4 +1,4 @@
-%define beta a23
+#define beta %{nil}
 # Build system doesn't support DI generation
 %define debug_package %{nil}
 
@@ -37,6 +37,7 @@ The suite includes the following programs:
 %prep
 %setup -q
 sed -i -e 's,^INS_BASE=.*,INS_BASE=%{_prefix},g' DEFAULTS/*
+sed -i -e 's,-noclobber,,' cdrecord/Makefile.dfl
 
 %build
 # The Makefile system isn't 100% ready for an SMP build
@@ -64,6 +65,7 @@ rm -f %{buildroot}%{_bindir}/btcflash
 %{_sbindir}/rscsi
 %{_prefix}/lib/siconv
 %{_mandir}/man1/*
+%{_mandir}/man3/*
 %{_mandir}/man5/*
 %{_mandir}/man8/*
 %{_sysconfdir}/default/cdrecord
