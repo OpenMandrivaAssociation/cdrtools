@@ -38,6 +38,10 @@ The suite includes the following programs:
 %setup -q
 sed -i -e 's,^INS_BASE=.*,INS_BASE=%{_prefix},g' DEFAULTS/*
 sed -i -e 's,-noclobber,,' cdrecord/Makefile.dfl
+%ifarch %ix86
+# doesnt work with clang on i586
+sed -i -e 's,^DEFCCOM=.*,DEFCCOM=gcc,g' DEFAULTS/*
+%endif
 
 %build
 # The Makefile system isn't 100% ready for an SMP build
