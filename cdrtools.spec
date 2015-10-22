@@ -4,7 +4,7 @@
 
 Name: cdrtools
 Version: 3.01
-Release: 6
+Release: 7
 Source0: ftp://ftp.berlios.de/pub/cdrecord/alpha/%{name}-%{version}%{?beta:%{beta}}.tar.bz2
 Summary: Tools for working with writable CD, DVD and BluRay media
 URL: http://cdrecord.berlios.de/
@@ -16,7 +16,8 @@ Obsoletes: cdrkit-genisoimage < 1.1.11-11
 Provides: cdrecord = %{EVRD}
 Provides: mkisofs = %{EVRD}
 Requires(post): libcap-utils
- 
+Conflicts: man-pages < 4.02-1
+
 %description
 Cdrtools is a set of command line programs that allows to
 record CD/DVD/BluRay media.
@@ -30,7 +31,7 @@ The suite includes the following programs:
             with optional Rock Ridge attributes 
   isodebug  A program to print mkisofs debug information from media 
   isodump   A program to dump ISO-9660 media 
-  isoinfo   A program to analyse/verify ISO/9660/Joliet/Rock-Ridge Filesystems 
+  isoinfo   A program to analyse/verify ISO/9660/Joliet/Rock-Ridge Filesystem
   isovfy    A program to verify the ISO-9660 structures 
   rscsi     A Remote SCSI enabling daemon 
 
@@ -60,9 +61,18 @@ rm -rf \
 # We get this from dvd+rw-tools
 rm -f %{buildroot}%{_bindir}/btcflash
 
+rm -rf %{buildroot}%{_mandir}/man3/fexecve.3* \
+	%{buildroot}%{_mandir}/man3/fnmatch.3* \
+	%{buildroot}%{_mandir}/man3/fprintf.3* \
+	%{buildroot}%{_mandir}/man3/getline.3* \
+	%{buildroot}%{_mandir}/man3/printf.3* \
+	%{buildroot}%{_mandir}/man3/sprintf.3* \
+	%{buildroot}%{_mandir}/man3/strlen.3*
+
 %post
 %{_sbindir}/setcap cap_sys_resource,cap_dac_override,cap_sys_admin,cap_sys_nice,cap_net_bind_service,cap_ipc_lock,cap_sys_rawio+ep %{_bindir}/cdrecord
 %{_sbindir}/setcap cap_dac_override,cap_sys_admin,cap_sys_nice,cap_net_bind_service,cap_sys_rawio+ep %{_bindir}/cdda2wav
+%{_sbindir}/setcap cap_dac_override,cap_sys_admin,cap_net_bind_service,cap_sys_rawio+ep %{_bindir}/readcd
 
 %files
 %{_bindir}/*
