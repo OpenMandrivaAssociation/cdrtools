@@ -1,13 +1,13 @@
-#define beta %{nil}
+%define beta %{nil}
 # Build system doesn't support DI generation
 %define debug_package %{nil}
 
 Name: cdrtools
 Version: 3.01
 Release: 7
-Source0: ftp://ftp.berlios.de/pub/cdrecord/alpha/%{name}-%{version}%{?beta:%{beta}}.tar.bz2
+Source0: http://downloads.sourceforge.net/project/cdrtools/%{?beta:alpha/}%{name}-%{version}%{?beta:%{beta}}.tar.bz2
 Summary: Tools for working with writable CD, DVD and BluRay media
-URL: http://cdrecord.berlios.de/
+URL: http://cdrtools.sourceforge.net/
 License: Various Open Source Licenses (GPL, CDDL, BSD)
 Group: Archiving/Cd burning
 BuildRequires: %{_lib}cap-devel
@@ -27,11 +27,11 @@ The suite includes the following programs:
   cdrecord  A CD/DVD/BD recording program 
   readcd    A program to read CD/DVD/BD media with CD-clone features 
   cdda2wav  The most evolved CD-audio extraction program with paranoia support 
-  mkisofs   A program to create hybrid ISO9660/JOLIET/HFS filesystes
+  mkisofs   A program to create hybrid ISO-9660/Joliet/HFS filesystems
             with optional Rock Ridge attributes 
   isodebug  A program to print mkisofs debug information from media 
   isodump   A program to dump ISO-9660 media 
-  isoinfo   A program to analyse/verify ISO/9660/Joliet/Rock-Ridge Filesystem
+  isoinfo   A program to analyse/verify ISO-9660/Joliet/Rock-Ridge filesystems 
   isovfy    A program to verify the ISO-9660 structures 
   rscsi     A Remote SCSI enabling daemon 
 
