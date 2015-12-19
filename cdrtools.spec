@@ -4,7 +4,7 @@
 
 Name: cdrtools
 Version: 3.01
-Release: 7
+Release: 8
 Source0: http://downloads.sourceforge.net/project/cdrtools/%{?beta:alpha/}%{name}-%{version}%{?beta:%{beta}}.tar.bz2
 Summary: Tools for working with writable CD, DVD and BluRay media
 URL: http://cdrtools.sourceforge.net/
