@@ -4,7 +4,7 @@
 
 Name: cdrtools
 Version: 3.01
-Release: 8
+Release: 9
 Source0: http://downloads.sourceforge.net/project/cdrtools/%{?beta:alpha/}%{name}-%{version}%{?beta:%{beta}}.tar.bz2
 Summary: Tools for working with writable CD, DVD and BluRay media
 URL: http://cdrtools.sourceforge.net/
@@ -16,7 +16,7 @@ Obsoletes: cdrkit-genisoimage < 1.1.11-11
 Provides: cdrecord = %{EVRD}
 Provides: mkisofs = %{EVRD}
 Requires(post): libcap-utils
-Conflicts: man-pages < 4.02-1
+Conflicts: man-pages < 4.05-1
 
 %description
 Cdrtools is a set of command line programs that allows to
@@ -46,7 +46,7 @@ sed -i -e 's,^DEFCCOM=.*,DEFCCOM=gcc,g' DEFAULTS/*
 
 %build
 # The Makefile system isn't 100% ready for an SMP build
-make
+%make -j1
 
 %install
 %makeinstall_std
@@ -67,7 +67,8 @@ rm -rf %{buildroot}%{_mandir}/man3/fexecve.3* \
 	%{buildroot}%{_mandir}/man3/getline.3* \
 	%{buildroot}%{_mandir}/man3/printf.3* \
 	%{buildroot}%{_mandir}/man3/sprintf.3* \
-	%{buildroot}%{_mandir}/man3/strlen.3*
+	%{buildroot}%{_mandir}/man3/strlen.3* \
+	%{buildroot}%{_mandir}/man3/error.3*
 
 %post
 %{_sbindir}/setcap cap_sys_resource,cap_dac_override,cap_sys_admin,cap_sys_nice,cap_net_bind_service,cap_ipc_lock,cap_sys_rawio+ep %{_bindir}/cdrecord
