@@ -1,16 +1,25 @@
-%define beta %{nil}
+%define beta a06
 # Build system doesn't support DI generation
 %define debug_package %{nil}
 
+%bcond_with alsa
+%bcond_with pulse
+
 Name: cdrtools
-Version: 3.01
-Release: 9
-Source0: http://downloads.sourceforge.net/project/cdrtools/%{?beta:alpha/}%{name}-%{version}%{?beta:%{beta}}.tar.bz2
+Version: 3.02
+Release: 1
+Source0: http://downloads.sourceforge.net/cdrtools/%{name}-%{version}%{?beta:%{beta}}.tar.bz2
 Summary: Tools for working with writable CD, DVD and BluRay media
 URL: http://cdrtools.sourceforge.net/
-License: Various Open Source Licenses (GPL, CDDL, BSD)
+License: Various Open Source Licenses (CDDL.Schily, GPL-2.0, LGPL-2.1, BSD)
 Group: Archiving/Cd burning
 BuildRequires: %{_lib}cap-devel
+%if %{with alsa}
+BuildRequires: pkgconfig(alsa)
+%endif
+%if %{with pulse}
+BuildRequires: pkgconfig(libpulse)
+%endif
 Obsoletes: cdrkit < 1.1.11-11
 Obsoletes: cdrkit-genisoimage < 1.1.11-11
 Provides: cdrecord = %{EVRD}
@@ -39,6 +48,8 @@ The suite includes the following programs:
 %setup -q
 sed -i -e 's,^INS_BASE=.*,INS_BASE=%{_prefix},g' DEFAULTS/*
 sed -i -e 's,-noclobber,,' cdrecord/Makefile.dfl
+# Remove lib*/*_p.mk to skip the compilation of profiled libs
+rm -f lib*/*_p.mk
 %ifarch %ix86
 # doesnt work with clang on i586
 sed -i -e 's,^DEFCCOM=.*,DEFCCOM=gcc,g' DEFAULTS/*
@@ -54,7 +65,6 @@ sed -i -e 's,^DEFCCOM=.*,DEFCCOM=gcc,g' DEFAULTS/*
 # Not much of a point in shipping static libs and headers for libs used
 # only by cdrtools
 rm -rf \
-	%{buildroot}%{_prefix}/lib/profiled \
 	%{buildroot}%{_prefix}/lib/*.a \
 	%{buildroot}%{_includedir}
 
