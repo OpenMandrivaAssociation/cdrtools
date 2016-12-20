@@ -1,4 +1,4 @@
-%define beta a06
+%define beta a07
 # Build system doesn't support DI generation
 %define debug_package %{nil}
 
