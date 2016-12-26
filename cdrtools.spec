@@ -1,4 +1,4 @@
-%define beta a06
+%define beta a07
 # Build system doesn't support DI generation
 %define debug_package %{nil}
 
@@ -7,7 +7,7 @@
 
 Name: cdrtools
 Version: 3.02
-Release: 1
+Release: 2
 Source0: http://downloads.sourceforge.net/cdrtools/%{name}-%{version}%{?beta:%{beta}}.tar.bz2
 Summary: Tools for working with writable CD, DVD and BluRay media
 URL: http://cdrtools.sourceforge.net/
